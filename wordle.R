@@ -105,8 +105,8 @@ get_words <- function(new_words=new_words){
 }
 
 letter_color_check <- function(index=4) {
-  letter <- str_sub(letters,index,index)
-  color <- str_sub(colors,index,index)
+  letter <- str_sub(letters_attempt,index,index)
+  color <- str_sub(colors_attempt,index,index)
   if(color=='b'){
     if(is.na(letters_out)[1]) {
       letters_out <<- letter 
@@ -133,9 +133,9 @@ letter_color_check <- function(index=4) {
   }
 }
 
-run_attempt <- function(letters = letters,colors=colors){
-  letters <<- letters
-  colors <<- colors
+run_attempt <- function(letters_attempt = letters_attempt,colors_attempt=colors_attempt){
+  letters_attempt <<- letters_attempt
+  colors_attempt <<- colors_attempt
   purrr::map(.x = 1:5,letter_color_check)
   
   get_words(get_filtered_words(letters_in = letters_in,
