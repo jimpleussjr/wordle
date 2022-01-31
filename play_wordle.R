@@ -15,7 +15,10 @@ get_words()
 ### write the word you entered in "letters"
 ### and the color of the results in "colors" where:
 ###      green = 'g', black = 'b', yellow = 'y'
-run_attempt(letters_attempt = "daddy", colors_attempt = "ggbyb")
+run_attempt(letters_attempt = "clear", colors_attempt = "bbbby")
+run_attempt(letters_attempt = "torrs", colors_attempt = "bbybb")
+run_attempt(letters_attempt = "briny", colors_attempt = "bgbgb")
+run_attempt(letters_attempt = "drunk", colors_attempt = "bgggb")
 
 # Rerun it for subsequent attempts. If you need to start over, just run reset() and prep_words()
 
