@@ -1,0 +1,65 @@
+---
+title: "Wordle"
+author: "Jim Pleuss and Dusty Turner"
+output: flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(shiny)
+library(shinyjs)
+source("wordle_functions.R")
+reset()  
+prep_words()
+get_words() 
+```
+
+Inputs {.sidebar}
+-------------------------------
+
+
+```{r echo=FALSE}
+textInput(inputId = "word", label = "Add Word")
+textInput(inputId = "scheem", label = "scheem")
+
+actionButton("execute", "Submit")
+```
+
+outputs
+-------------------------------
+
+```{r echo=FALSE}
+
+table_data <- eventReactive(input$execute, {
+  run_attempt(letters_attempt = input$word, colors_attempt = input$scheem)
+})
+
+renderTable(table_data())
+
+```
+
+
+
+
+<!-- ```{r echo=FALSE} -->
+
+<!-- shinyApp( -->
+<!--   ui = basicPage( -->
+<!--     numericInput("num", label = "Make changes", value = 1), -->
+<!--     submitButton("Update View", icon("refresh")), -->
+<!--     helpText("When you click the button above, you should see", -->
+<!--              "the output below update to reflect the value you", -->
+<!--              "entered at the top:"), -->
+<!--     verbatimTextOutput("value") -->
+<!--   ), -->
+<!--   server = function(input, output) { -->
+
+<!--     # submit buttons do not have a value of their own, -->
+<!--     # they control when the app accesses values of other widgets. -->
+<!--     # input$num is the value of the number widget. -->
+<!--     output$value <- renderPrint({ input$num }) -->
+<!--   } -->
+<!-- ) -->
+<!-- ``` -->
+
