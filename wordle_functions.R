@@ -220,20 +220,23 @@ check_duplicates <- function(dup_letter = "d"){
 
 
 run_attempt <- function(letters_attempt = letters_attempt,colors_attempt=colors_attempt){
-  letters_attempt <<- letters_attempt
-  colors_attempt <<- colors_attempt
-  dup_letters <- letters_attempt %>% 
-    str_split("") %>% 
-    unlist() %>% 
-    tibble(ltrs = .) %>% 
-    count(ltrs) %>% 
-    filter(n>1) %>% 
-    pull(ltrs)
-  
-  map(.x=dup_letters,.f = check_duplicates)
-  
-  purrr::map(.x = 1:5,letter_color_check)
-  get_filtered_words()
+  # if(letters_attempt=="" | colors_attempt==""){
+  if(is.na(letters_attempt) | is.na(colors_attempt)){
+    letters_attempt <<- letters_attempt
+    colors_attempt <<- colors_attempt
+    dup_letters <- letters_attempt %>% 
+      str_split("") %>% 
+      unlist() %>% 
+      tibble(ltrs = .) %>% 
+      count(ltrs) %>% 
+      filter(n>1) %>% 
+      pull(ltrs)
+    
+    map(.x=dup_letters,.f = check_duplicates)
+    
+    purrr::map(.x = 1:5,letter_color_check)
+    get_filtered_words()
+  }
   get_words()
 
 }

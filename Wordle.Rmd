@@ -18,23 +18,36 @@ get_words()
 Inputs {.sidebar}
 -------------------------------
 
+Submit blank word and color scheme for initial word list
 
 ```{r echo=FALSE}
-textInput(inputId = "word", label = "Add Word")
-textInput(inputId = "scheem", label = "scheem")
+
+
+textInput(inputId = "word", label = "Add Word (ex. cares)")
+textInput(inputId = "scheme", label = "Color Scheme (ex. bbgyb)")
 
 actionButton("execute", "Submit")
+
 ```
+
+
+sum_pos_props = sum of all the probabilities that the letter will appear in its particular position in the subset of feasible words
+
+sum_prop_words = sum of all the probabilities that the letters will appear anywhere in the subset of feasible words.
+
+repeat_ltrs = number of letters repeated in the word. Better to use 0 early on.
+
+Rerun it for subsequent attempts. If you need to start over, just close and reopen it.
+
 
 outputs
 -------------------------------
 
 ```{r echo=FALSE}
+table_data <- eventReactive(input$execute,  run_attempt(letters_attempt = input$word, colors_attempt = input$scheme))
+# table_data <- eventReactive(input$initial, get_words())
 
-table_data <- eventReactive(input$execute, {
-  run_attempt(letters_attempt = input$word, colors_attempt = input$scheem)
-})
-
+# renderTable(initial_table())
 renderTable(table_data())
 
 ```
